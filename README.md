@@ -1,0 +1,131 @@
+# knu-is-lab-2
+
+## Хід роботи
+
+### Крок 1: Виберіть предметну область
+
+Предметна область: тварини
+
+### Крок 2: Складіть набір фактів
+
+> Напишіть не менше 25 фактів, використовуючи is_a та part_of.
+
+Факти пердставлені у файлі [main.pl](/main.pl). Всього 33 факти.
+
+#### 1. Класифікація тварин (is_a):
+
+Ці факти вказують на те, до якого класу належить кожна тварина:
+
+```
+is_a(mammal, animal) — ссавець є твариною.
+is_a(bird, animal) — птах є твариною.
+is_a(reptile, animal)  — рептилія є твариною.
+is_a(fish, animal) — риба є твариною.
+is_a(amphibian, animal) — амфібія є твариною.
+is_a(lion, mammal) — лев є ссавцем.
+is_a(elephant, mammal) — слон є ссавцем.
+is_a(dolphin, mammal) — дельфін є ссавцем.
+is_a(eagle, bird) — орел є птахом.
+is_a(sparrow, bird) — горобець є птахом.
+is_a(snake, reptile) — змія є рептилією.
+is_a(turtle, reptile) — черепаха є рептилією.
+is_a(shark, fish) — акула є рибою.
+is_a(salmon, fish) — лосось є рибою.
+is_a(frog, amphibian) — жаба є амфібією.
+is_a(salamander, amphibian) — саламандра є амфібією.
+```
+
+#### 2. Місця проживання тварин (part_of):
+
+Ці факти описують середовища, в яких мешкають різні тварини:
+
+```
+part_of(lion, savanna) — лев живе в савані.
+part_of(elephant, savanna) — слон живе в савані.
+part_of(dolphin, ocean) — дельфін живе в океані.
+part_of(eagle, mountains) — орел живе в горах.
+part_of(sparrow, forest) — горобець живе в лісі.
+part_of(snake, desert) — змія живе в пустелі.
+part_of(turtle, tropical_forest) — черепаха живе в тропічному лісі.
+part_of(shark, ocean) — акула живе в океані.
+part_of(salmon, river) — лосось живе в річці.
+part_of(frog, lake) — жаба живе в озері.
+part_of(salamander, forest) — саламандра живе в лісі.
+```
+
+#### 3. Частини тіла тварин (part_of):
+
+Ці факти описують, які частини тіла є у кожної з тварин:
+
+```
+part_of(mane, lion) — грива є частиною лева.
+part_of(trunk, elephant) — хобот є частиною слона.
+part_of(fin, dolphin) — плавник є частиною дельфіна.
+part_of(wings, eagle) — крила є частиною орла.
+part_of(beak, sparrow) — дзьоб є частиною горобця.
+part_of(scales, snake) — луска є частиною змії.
+part_of(shell, turtle) — панцир є частиною черепахи.
+part_of(teeth, shark) — зуби є частиною акули.
+part_of(tail, salmon) — хвіст є частиною лосося.
+part_of(legs, frog) — лапи є частиною жаби.
+part_of(tail, salamander) — хвіст є частиною саламандри.
+```
+
+### Крок 3: Напишіть правила виведення
+
+> Правила можуть бути загальними для транзитивності та спадкування.
+
+Правила пердставлені у файлі [main.pl](/main.pl).
+
+#### 1. Правило транзитивності для класифікації (is_a):
+
+Якщо X належить до Y, а Y належить до Z, то X також належить до Z.
+
+```
+is_a(X, Z) :- is_a(X, Y), is_a(Y, Z).
+```
+
+Приклад: Лев — ссавець, ссавці — тварини → Лев — тварина.
+
+#### 2. Правило транзитивності для частин (part_of):
+
+Якщо X є частиною Y, а Y є частиною Z, то X також частина Z.
+
+```
+part_of(X, Z) :- part_of(X, Y), part_of(Y, Z).
+```
+
+Приклад: Грива — частина лева, лев — частина савани → Грива — частина савани.
+
+### Крок 4: Перевірте структуру онтології
+
+> Намалюйте дерево або уявіть його, щоб переконатися, що вимоги виконані
+
+Дерево:
+```
+animal
+├── mammal
+│   ├── lion
+│   ├── elephant
+│   └── dolphin
+├── bird
+│   ├── eagle
+│   └── sparrow
+├── reptile
+│   ├── snake
+│   └── turtle
+├── fish
+│   ├── shark
+│   └── salmon
+└── amphibian
+    ├── frog
+    └── salamander
+```
+
+### Крок 5: Тестуйте вашу базу знань
+
+> Використовуйте Prolog-інтерпретатор для перевірки (https://onecompiler.com/prolog/).
+
+![example 1](/demonstration/example-1.png)
+![example 1](/demonstration/example-2.png)
+![example 1](/demonstration/example-3.png)
