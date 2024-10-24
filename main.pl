@@ -1,3 +1,9 @@
+:- discontiguous is_a/2.
+:- discontiguous part_of/2.
+
+:- table is_a/2.
+:- table part_of/2.
+
 % Top level facts
 is_a(animal, thing).
 is_a(vehicle, thing).
@@ -66,7 +72,8 @@ part_of(tail, salamander).
 % Rules
 
 % If X is a member of Y, and Y is a member of Z, then X is also a member of Z
-is_a(X, Z) :- is_a(X, Y), is_a(Y, Z).
+is_a_(X, Y) :- is_a(X, Y).
+is_a_(X, Z) :- is_a(X, Y), is_a_(Y, Z).
 
 % If Y is Z and X is a part of Z, then X is a part of Y
 part_of(X, Y) :- is_a(Y, Z), part_of(X, Z).
