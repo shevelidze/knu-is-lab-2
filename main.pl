@@ -1,3 +1,25 @@
+% Top level facts
+is_a(animal, thing).
+is_a(vehicle, thing).
+
+% Facts about vehicles
+is_a(truck, vehicle).
+is_a(car, vehicle).
+
+is_a(semi, truck).
+is_a(pickup, truck).
+
+is_a(sedan, car).
+is_a(coupe, car).
+
+% Parts of vehicles
+part_of(engine, vehicle).
+part_of(wheels, vehicle).
+part_of(body, vehicle).
+part_of(cab, vehicle).
+part_of(bed, truck).
+part_of(cargo, truck).
+
 % Facts about animal classification
 is_a(mammal, animal).
 is_a(bird, animal).
@@ -17,7 +39,7 @@ is_a(salmon, fish).
 is_a(frog, amphibian).
 is_a(salamander, amphibian).
 
-% Facts about animal habitats
+% Parts of animals
 part_of(lion, savanna).
 part_of(elephant, savanna).
 part_of(dolphin, ocean).
@@ -29,8 +51,6 @@ part_of(shark, ocean).
 part_of(salmon, river).
 part_of(frog, lake).
 part_of(salamander, forest).
-
-% Facts about animal body parts
 part_of(mane, lion).
 part_of(trunk, elephant).
 part_of(fin, dolphin).
@@ -48,5 +68,5 @@ part_of(tail, salamander).
 % If X is a member of Y, and Y is a member of Z, then X is also a member of Z
 is_a(X, Z) :- is_a(X, Y), is_a(Y, Z).
 
-% If X is a part of Y, and Y is a part of Z, then X is also a part of Z
-part_of(X, Z) :- part_of(X, Y), part_of(Y, Z).
+% If Y is Z and X is a part of Z, then X is a part of Y
+part_of(X, Y) :- is_a(Y, Z), part_of(X, Z).

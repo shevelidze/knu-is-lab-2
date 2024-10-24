@@ -12,14 +12,22 @@
 
 Факти пердставлені у файлі [main.pl](/main.pl). Всього 33 факти.
 
-#### 1. Класифікація тварин (is_a):
+#### 1. Класифікація тварин та машин (is_a):
 
 Ці факти вказують на те, до якого класу належить кожна тварина:
 
 ```
+is_a(animal, thing) — тварина є річчю.
+is_a(vehicle, thing) — транспортний засіб є річчю.
+is_a(truck, vehicle) — вантажівка є транспортним засобом.
+is_a(car, vehicle) — автомобіль є транспортним засобом.
+is_a(semi, truck) — тягач є вантажівкою.
+is_a(pickup, truck) — пікап є вантажівкою.
+is_a(sedan, car) — седан є автомобілем.
+is_a(coupe, car) — купе є автомобілем.
 is_a(mammal, animal) — ссавець є твариною.
 is_a(bird, animal) — птах є твариною.
-is_a(reptile, animal)  — рептилія є твариною.
+is_a(reptile, animal) — рептилія є твариною.
 is_a(fish, animal) — риба є твариною.
 is_a(amphibian, animal) — амфібія є твариною.
 is_a(lion, mammal) — лев є ссавцем.
@@ -53,11 +61,17 @@ part_of(frog, lake) — жаба живе в озері.
 part_of(salamander, forest) — саламандра живе в лісі.
 ```
 
-#### 3. Частини тіла тварин (part_of):
+#### 3. Частини тварин та машин (part_of):
 
 Ці факти описують, які частини тіла є у кожної з тварин:
 
 ```
+part_of(engine, vehicle) — двигун є частиною транспортного засобу.
+part_of(wheels, vehicle) — колеса є частиною транспортного засобу.
+part_of(body, vehicle) — кузов є частиною транспортного засобу.
+part_of(cab, vehicle) — кабіна є частиною транспортного засобу.
+part_of(bed, truck) — вантажна платформа є частиною вантажівки.
+part_of(cargo, truck) — вантаж є частиною вантажівки.
 part_of(mane, lion) — грива є частиною лева.
 part_of(trunk, elephant) — хобот є частиною слона.
 part_of(fin, dolphin) — плавник є частиною дельфіна.
@@ -89,13 +103,13 @@ is_a(X, Z) :- is_a(X, Y), is_a(Y, Z).
 
 #### 2. Правило транзитивності для частин (part_of):
 
-Якщо X є частиною Y, а Y є частиною Z, то X також частина Z.
+Якщо Y є Z і X є частиною Z, то X є частиною Y
 
 ```
-part_of(X, Z) :- part_of(X, Y), part_of(Y, Z).
+part_of(X, Y) :- is_a(Y, Z), part_of(X, Z).
 ```
 
-Приклад: Грива — частина лева, лев — частина савани → Грива — частина савани.
+Приклад: Двигун —  частина транспортного засобу → Двигун — частина седану
 
 ### Крок 4: Перевірте структуру онтології
 
@@ -103,23 +117,32 @@ part_of(X, Z) :- part_of(X, Y), part_of(Y, Z).
 
 Дерево:
 ```
-animal
-├── mammal
-│   ├── lion
-│   ├── elephant
-│   └── dolphin
-├── bird
-│   ├── eagle
-│   └── sparrow
-├── reptile
-│   ├── snake
-│   └── turtle
-├── fish
-│   ├── shark
-│   └── salmon
-└── amphibian
-    ├── frog
-    └── salamander
+thing
+├── animal
+│   ├── mammal
+│   │   ├── lion
+│   │   ├── elephant
+│   │   └── dolphin
+│   ├── bird
+│   │   ├── eagle
+│   │   └── sparrow
+│   ├── reptile
+│   │   ├── snake
+│   │   └── turtle
+│   ├── fish
+│   │   ├── shark
+│   │   └── salmon
+│   └── amphibian
+│       ├── frog
+│       └── salamander
+└── vehicle
+    ├── truck
+    │   ├── semi
+    │   └── pickup
+    └── car
+        ├── sedan
+        └── coupe
+
 ```
 
 ### Крок 5: Тестуйте вашу базу знань
